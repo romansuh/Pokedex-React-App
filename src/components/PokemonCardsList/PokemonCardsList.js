@@ -5,7 +5,6 @@ import {useEffect} from "react";
 import {fetchPokemons} from "../../store/features/pokemonSlice";
 import {POKE_API_URL_FIRST} from "../../common/pokeapi";
 import LoadMoreButton from "./LoadMoreButton";
-import LoadPreviousButton from "./LoadPreviousButton";
 
 const PokemonCardsList = () => {
     const dispatch = useDispatch();
@@ -27,7 +26,6 @@ const PokemonCardsList = () => {
                     return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
                 })}
                 <LoadMoreButton/>
-                <LoadPreviousButton/>
             </>
         );
     }
