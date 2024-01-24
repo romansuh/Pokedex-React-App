@@ -58,6 +58,7 @@ const PokemonCard = ({
             className="card_container"
             tabIndex={1}
             onClick={() => handleInfoVisible(pokeapiURL)}
+
         >
             <img src={spriteURL} alt="Pokemon sprite"/>
 
@@ -67,6 +68,7 @@ const PokemonCard = ({
                 {types.map(type => {
                     return (
                         <div
+                            key={typeColors[type]}
                             className="type_badge"
                             style={{backgroundColor: typeColors[type]}}
                         >

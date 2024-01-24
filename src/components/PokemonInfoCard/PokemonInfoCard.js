@@ -27,12 +27,12 @@ const PokemonInfoCard = () => {
                 setSprite(pokemonInfo.sprites.front_default);
                 setName(pokemonInfo.name);
                 setTypes(pokemonInfo.types.map(slot => capitalizeFirstLetter(slot.type.name)).join(", "));
-                setHp(stats[0]?.base_stat);
-                setAttack(stats[1]?.base_stat);
-                setDefense(stats[2]?.base_stat);
-                setSpAttack(stats[3]?.base_stat);
-                setSpDefense(stats[4]?.base_stat);
-                setSpeed(stats[5]?.base_stat);
+                setHp(stats[0].base_stat);
+                setAttack(stats[1].base_stat);
+                setDefense(stats[2].base_stat);
+                setSpAttack(stats[3].base_stat);
+                setSpDefense(stats[4].base_stat);
+                setSpeed(stats[5].base_stat);
                 setWeight(pokemonInfo.weight);
                 setTotalMoves(pokemonInfo.moves.length);
 
@@ -48,9 +48,12 @@ const PokemonInfoCard = () => {
         <div className="info_card_container">
             <img src={sprite} alt="Pokemon sprite"/>
             <table>
+                <thead>
                 <tr>
                     <th>{capitalizeFirstLetter(name)}</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>Type</td>
                     <td>{types}</td>
@@ -87,6 +90,7 @@ const PokemonInfoCard = () => {
                     <td>Total moves</td>
                     <td>{totalMoves}</td>
                 </tr>
+                </tbody>
             </table>
         </div>
     );

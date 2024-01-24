@@ -43,7 +43,6 @@ export const pokemonSlice = createSlice({
                 };
 
                 state.pokemons = [...state.pokemons, ...response.data.results];
-                console.log(state.pokemons);
             })
     }
 });
