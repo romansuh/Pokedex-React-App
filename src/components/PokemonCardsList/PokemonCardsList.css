@@ -1,0 +1,16 @@
+.cards_list_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    margin: 10px;
+    width: fit-content;
+}
+
+.card_container {
+    border: 1px solid lightgray;
+    width: 100px;
+    height: 150px;
+    text-align: center;
+    border-radius: 5px;
+}
