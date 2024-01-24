@@ -1,16 +1,18 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
+import {POKE_API_URL_FIRST, POKE_API_URL_SECOND} from "../../common/pokeapi";
 
 export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", async (url) => {
     const response = await axios.get(url);
-    return response.data;
+    console.log(response)
+    return {data: response.data, currentURL: response.request.responseURL};
 })
 
 const initialState = {
     url: {
         previous: null,
-        current: null,
-        next: null
+        current: POKE_API_URL_FIRST,
+        next: POKE_API_URL_SECOND
     },
     pokemons: [],
     status: "idle"
@@ -27,14 +29,15 @@ export const pokemonSlice = createSlice({
             .addCase(fetchPokemons.fulfilled, (state, action) => {
                 state.status = "succeeded";
 
-                const data = action.payload;
+                const response = action.payload;
 
-                state.url.previous = state.url.current;
-                console.log(state.url.current)
-                state.url.current = state.url.next;
-                state.url.next = data.next;
+                state.url = {
+                    previous: response.data.previous,
+                    current: response.currentURL,
+                    next: response.data.next
+                };
 
-                state.pokemons = data.results;
+                state.pokemons = response.data.results;
             })
     }
 });
