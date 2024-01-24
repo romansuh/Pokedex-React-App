@@ -10,7 +10,11 @@ const LoadPreviousButton = () => {
     }
 
     return (
-        <button onClick={handleLoadPrevious} disabled={url.previous === null}>Load Previous</button>
+        <button
+            className="load_prev_btn"
+            onClick={handleLoadPrevious}
+            disabled={url.previous === null}
+        >Load Previous</button>
     );
 }
 

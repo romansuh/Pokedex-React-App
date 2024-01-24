@@ -10,7 +10,7 @@
 .card_container {
     border: 1px solid lightgray;
     width: 100px;
-    height: fit-content;
+    height: 180px;
     text-align: center;
     border-radius: 5px;
     padding: 2px;
@@ -21,6 +21,7 @@
     flex-wrap: wrap;
     gap: 2px;
     height: 40px;
+    margin-top: 2px;
 }
 
 .type_badge {
@@ -42,4 +43,46 @@
     top: 700%;
     left: 100%;
     color: grey;
+}
+
+.load_more_btn {
+    border: 1px solid #4a5de5;
+    border-radius: 5px;
+    background-color: #4a5de5;
+    transition: background-color 0.2s;
+    color: white;
+    font-size: 18px;
+    padding: 5px;
+    grid-column: span 3;
+}
+
+.load_more_btn:not([disabled]):hover {
+    background-color: #09168a;
+}
+
+.load_more_btn:disabled {
+    border: 1px solid lightgrey;
+    color: lightgrey;
+    background-color: #ffffff;
+}
+
+.load_prev_btn {
+    border: 1px solid #4a5de5;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: color, background-color 0.2s;
+    color: #4a5de5;
+    font-size: 14px;
+    padding: 1px;
+    grid-column: span 3;
+}
+
+.load_prev_btn:not([disabled]):hover {
+    background-color: #4a5de5;
+    color: white;
+}
+
+.load_prev_btn:disabled {
+    border: 1px solid lightgrey;
+    color: lightgrey;
 }

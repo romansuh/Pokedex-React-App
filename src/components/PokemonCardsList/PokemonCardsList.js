@@ -25,9 +25,8 @@ const PokemonCardsList = () => {
                     {pokemons.map(pokemon => {
                         return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
                     })}
-
-                    <LoadPreviousButton/>
                     <LoadMoreButton/>
+                    <LoadPreviousButton/>
                 </>
             }
         </div>

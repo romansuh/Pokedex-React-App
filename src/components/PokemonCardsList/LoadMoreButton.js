@@ -10,7 +10,11 @@ const LoadMoreButton = () => {
     }
 
     return (
-        <button onClick={handleLoadMore} disabled={url.next === null}>Load More</button>
+        <button
+            className="load_more_btn"
+            onClick={handleLoadMore}
+            disabled={url.next === null}
+        >Load More</button>
     );
 }
 
