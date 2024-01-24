@@ -1,7 +1,32 @@
+import axios from "axios";
+import {useEffect, useState} from "react";
+
+const fetchPokemonTypes = async (pokeURL) => {
+    const response = await axios.get(pokeURL);
+    return response.data.types;
+};
+
 const PokemonCard = ({
                          name,
                          pokeapiURL
                      }) => {
+    const [types, setTypes] = useState([]);
+
+    useEffect(() => {
+        const getPokemonTypes = async () => {
+            try {
+                const pokemonTypesSlots = await fetchPokemonTypes(pokeapiURL);
+                const pokemonTypes = pokemonTypesSlots.map(slot => slot.type.name)
+                setTypes(pokemonTypes);
+            } catch (error) {
+                console.log('Error fetching pokemon types:', error)
+            }
+        }
+
+        getPokemonTypes();
+
+    }, [pokeapiURL])
+
     const handleCardClick = () => {
         console.log(2)
     }
@@ -13,14 +38,15 @@ const PokemonCard = ({
             onClick={handleCardClick}
         >
             <img src="#" alt="Pokemon sprite" className="card_image"/>
-            <h2 className="card_title">{name}</h2>
+            <h4 className="card_title">{name}</h4>
             <div className="types_container">
-                <div className="type_badge">
-                    <div className="type"><span>type 1</span></div>
-                </div>
-                <div className="type_badge">
-                    <div className="type"><span>type 2</span></div>
-                </div>
+                {types.map(type => {
+                    return (
+                        <div className="type_badge">
+                            <span className="type_name">{type}</span>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
