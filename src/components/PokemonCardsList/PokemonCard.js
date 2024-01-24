@@ -1,7 +1,6 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {fetchPokemonInfo} from "../../common/pokeapi";
-
-const capitalizeFirstLetter = (word) => word.charAt(0).toUpperCase() + word.substring(1);
+import {capitalizeFirstLetter, InfoVisibleContext} from "../../App";
 
 const typeColors = {
     normal: '#A8A77A',
@@ -33,6 +32,8 @@ const PokemonCard = ({
     const [types, setTypes] = useState([]);
     const [spriteURL, setSpriteURL] = useState("");
 
+    const {handleInfoVisible} = useContext(InfoVisibleContext);
+
     useEffect(() => {
         const getPokemonTypes = async () => {
             try {
@@ -52,15 +53,11 @@ const PokemonCard = ({
 
     }, [pokeapiURL])
 
-    const handleCardClick = () => {
-        console.log(2)
-    }
-
     return (
         <div
             className="card_container"
             tabIndex={1}
-            onClick={handleCardClick}
+            onClick={() => handleInfoVisible(pokeapiURL)}
         >
             <img src={spriteURL} alt="Pokemon sprite"/>
 

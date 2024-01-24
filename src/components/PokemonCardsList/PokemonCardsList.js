@@ -16,19 +16,26 @@ const PokemonCardsList = () => {
         dispatch(fetchPokemons(POKE_API_URL_FIRST))
     }, [dispatch])
 
+    const renderContent = () => {
+        if (status === "loading") {
+            return <h1 className="loading_msg">Loading...</h1>
+        }
+
+        return (
+            <>
+                {pokemons.map(pokemon => {
+                    return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
+                })}
+                <LoadMoreButton/>
+                <LoadPreviousButton/>
+            </>
+        );
+    }
+
+
     return (
         <div className="cards_list_container">
-            {status === "loading"
-                ? <h1 className="loading_msg">Loading...</h1>
-                :
-                <>
-                    {pokemons.map(pokemon => {
-                        return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
-                    })}
-                    <LoadMoreButton/>
-                    <LoadPreviousButton/>
-                </>
-            }
+            {renderContent()}
         </div>
     );
 }

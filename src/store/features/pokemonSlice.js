@@ -4,7 +4,6 @@ import {POKE_API_URL_FIRST, POKE_API_URL_SECOND} from "../../common/pokeapi";
 
 export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", async (url) => {
     const response = await axios.get(url);
-    console.log(response)
     return {data: response.data, currentURL: response.request.responseURL};
 })
 
@@ -15,12 +14,18 @@ const initialState = {
         next: POKE_API_URL_SECOND
     },
     pokemons: [],
-    status: "idle"
+    infoPokemonURL: null,
+    status: "idle",
 }
 
 export const pokemonSlice = createSlice({
     name: "pokemon",
     initialState,
+    reducers: {
+        setInfoPokemonURL: (state, action) => {
+            state.infoPokemonURL = action.payload;
+        },
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchPokemons.pending, (state, action) => {
@@ -42,4 +47,6 @@ export const pokemonSlice = createSlice({
     }
 });
 
+
+export const {setInfoPokemonURL} = pokemonSlice.actions;
 export default pokemonSlice.reducer;
