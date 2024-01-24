@@ -1,8 +1,30 @@
-import axios from "axios";
 import {useEffect, useState} from "react";
 import {fetchPokemonInfo} from "../../common/pokeapi";
 
 const capitalizeFirstLetter = (word) => word.charAt(0).toUpperCase() + word.substring(1);
+
+const typeColors = {
+    normal: '#A8A77A',
+    fire: '#EE8130',
+    water: '#6390F0',
+    electric: '#F7D02C',
+    grass: '#7AC74C',
+    ice: '#96D9D6',
+    fighting: '#C22E28',
+    poison: '#A33EA1',
+    ground: '#E2BF65',
+    flying: '#A98FF3',
+    psychic: '#F95587',
+    bug: '#A6B91A',
+    rock: '#B6A136',
+    ghost: '#735797',
+    dragon: '#6F35FC',
+    dark: '#705746',
+    steel: '#B7B7CE',
+    fairy: '#D685AD',
+    unknown: '#FFF',
+    shadows: '#2b033866'
+}
 
 const PokemonCard = ({
                          name,
@@ -40,12 +62,17 @@ const PokemonCard = ({
             tabIndex={1}
             onClick={handleCardClick}
         >
-            <img src={spriteURL} alt="Pokemon sprite" className="card_image"/>
-            <h4 className="card_title">{capitalizeFirstLetter(name)}</h4>
+            <img src={spriteURL} alt="Pokemon sprite"/>
+
+            <h4>{capitalizeFirstLetter(name)}</h4>
+
             <div className="types_container">
                 {types.map(type => {
                     return (
-                        <div className="type_badge">
+                        <div
+                            className="type_badge"
+                            style={{backgroundColor: typeColors[type]}}
+                        >
                             <span className="type_name">{capitalizeFirstLetter(type)}</span>
                         </div>
                     );

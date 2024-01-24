@@ -17,20 +17,20 @@ const PokemonCardsList = () => {
     }, [dispatch])
 
     return (
-        <>
+        <div className="cards_list_container">
             {status === "loading"
-                ? <h1>Loading...</h1>
+                ? <h1 className="loading_msg">Loading...</h1>
                 :
-                <div className="cards_list_container">
+                <>
                     {pokemons.map(pokemon => {
                         return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
                     })}
 
                     <LoadPreviousButton/>
                     <LoadMoreButton/>
-                </div>
+                </>
             }
-        </>
+        </div>
     );
 }
 
