@@ -14,7 +14,6 @@ function App() {
     const dispatch = useDispatch();
 
     const handleInfoVisible = (pokeapiURL) => {
-        console.log(pokeapiURL)
         dispatch(setInfoPokemonURL(pokeapiURL))
         setInfoVisible(true)
     }

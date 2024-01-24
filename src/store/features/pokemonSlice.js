@@ -42,7 +42,8 @@ export const pokemonSlice = createSlice({
                     next: response.data.next
                 };
 
-                state.pokemons = response.data.results;
+                state.pokemons = [...state.pokemons, ...response.data.results];
+                console.log(state.pokemons);
             })
     }
 });
