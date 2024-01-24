@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchPokemons} from "../../store/features/pokemonSlice";
 import {POKE_API_URL_FIRST} from "../../common/pokeapi";
+import LoadMoreButton from "./LoadMoreButton";
+import LoadPreviousButton from "./LoadPreviousButton";
 
 const PokemonCardsList = () => {
     const dispatch = useDispatch();
@@ -11,13 +13,16 @@ const PokemonCardsList = () => {
 
     useEffect(() => {
         dispatch(fetchPokemons(POKE_API_URL_FIRST))
-    })
+    }, [dispatch])
 
     return (
         <div className="cards_list_container">
             {pokemons.map(pokemon => {
                 return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
             })}
+
+            <LoadPreviousButton/>
+            <LoadMoreButton/>
         </div>
     );
 }

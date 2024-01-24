@@ -30,6 +30,7 @@ export const pokemonSlice = createSlice({
                 const data = action.payload;
 
                 state.url.previous = state.url.current;
+                console.log(state.url.current)
                 state.url.current = state.url.next;
                 state.url.next = data.next;
 
