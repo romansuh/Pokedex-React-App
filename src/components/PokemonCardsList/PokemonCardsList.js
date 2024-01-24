@@ -10,20 +10,27 @@ import LoadPreviousButton from "./LoadPreviousButton";
 const PokemonCardsList = () => {
     const dispatch = useDispatch();
     const pokemons = useSelector(state => state.pokemon.pokemons);
+    const status = useSelector(state => state.pokemon.status);
 
     useEffect(() => {
         dispatch(fetchPokemons(POKE_API_URL_FIRST))
     }, [dispatch])
 
     return (
-        <div className="cards_list_container">
-            {pokemons.map(pokemon => {
-                return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
-            })}
+        <>
+            {status === "loading"
+                ? <h1>Loading...</h1>
+                :
+                <div className="cards_list_container">
+                    {pokemons.map(pokemon => {
+                        return <PokemonCard name={pokemon.name} pokeapiURL={pokemon.url}/>
+                    })}
 
-            <LoadPreviousButton/>
-            <LoadMoreButton/>
-        </div>
+                    <LoadPreviousButton/>
+                    <LoadMoreButton/>
+                </div>
+            }
+        </>
     );
 }
 

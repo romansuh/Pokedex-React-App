@@ -1,25 +1,28 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
+import {fetchPokemonInfo} from "../../common/pokeapi";
 
-const fetchPokemonTypes = async (pokeURL) => {
-    const response = await axios.get(pokeURL);
-    return response.data.types;
-};
+const capitalizeFirstLetter = (word) => word.charAt(0).toUpperCase() + word.substring(1);
 
 const PokemonCard = ({
                          name,
                          pokeapiURL
                      }) => {
     const [types, setTypes] = useState([]);
+    const [spriteURL, setSpriteURL] = useState("");
 
     useEffect(() => {
         const getPokemonTypes = async () => {
             try {
-                const pokemonTypesSlots = await fetchPokemonTypes(pokeapiURL);
-                const pokemonTypes = pokemonTypesSlots.map(slot => slot.type.name)
+                const pokemonInfo = await fetchPokemonInfo(pokeapiURL);
+
+                const pokemonTypes = pokemonInfo.types.map(slot => slot.type.name);
+                const pokemonSpriteURL = pokemonInfo.sprites.front_default;
+
                 setTypes(pokemonTypes);
+                setSpriteURL(pokemonSpriteURL);
             } catch (error) {
-                console.log('Error fetching pokemon types:', error)
+                console.log('Error fetching pokemon info:', error)
             }
         }
 
@@ -37,13 +40,13 @@ const PokemonCard = ({
             tabIndex={1}
             onClick={handleCardClick}
         >
-            <img src="#" alt="Pokemon sprite" className="card_image"/>
-            <h4 className="card_title">{name}</h4>
+            <img src={spriteURL} alt="Pokemon sprite" className="card_image"/>
+            <h4 className="card_title">{capitalizeFirstLetter(name)}</h4>
             <div className="types_container">
                 {types.map(type => {
                     return (
                         <div className="type_badge">
-                            <span className="type_name">{type}</span>
+                            <span className="type_name">{capitalizeFirstLetter(type)}</span>
                         </div>
                     );
                 })}
