@@ -24,6 +24,7 @@ function App() {
         >
             <div className="App">
                 <PokemonCardsList handleInfoVisible={handleInfoVisible}/>
+                {!isInfoVisible && <div className="pokemon_info_placeholder">Click on pokemon to get more info about it!</div>}
                 {isInfoVisible && <PokemonInfoCard/>}
             </div>
         </InfoContext.Provider>
