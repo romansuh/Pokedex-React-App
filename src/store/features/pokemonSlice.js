@@ -7,6 +7,11 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", async (u
     return {data: response.data, currentURL: response.request.responseURL};
 })
 
+export const fetchAllPokemonsByType = createAsyncThunk("pokemons/fetchAllPokemonsByType", async (url) => {
+    const response = await axios.get(url);
+    return response.data;
+})
+
 const initialState = {
     url: {
         previous: null,
@@ -16,6 +21,7 @@ const initialState = {
     pokemons: [],
     infoPokemonURL: null,
     status: "idle",
+    isByType: false,
 }
 
 export const pokemonSlice = createSlice({
@@ -25,6 +31,18 @@ export const pokemonSlice = createSlice({
         setInfoPokemonURL: (state, action) => {
             state.infoPokemonURL = action.payload;
         },
+        resetState: (state) => {
+            state.url = {
+                previous: null,
+                current: POKE_API_URL_FIRST,
+                next: POKE_API_URL_SECOND
+            };
+
+            state.pokemons = [];
+            state.infoPokemonURL = null;
+            state.status = "idle";
+            state.isByType = false;
+        }
     },
     extraReducers: builder => {
         builder
@@ -43,10 +61,23 @@ export const pokemonSlice = createSlice({
                 };
 
                 state.pokemons = [...state.pokemons, ...response.data.results];
+                state.isByType = false;
+            })
+            .addCase(fetchAllPokemonsByType.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(fetchAllPokemonsByType.fulfilled, (state, action) => {
+                state.status = "succeeded";
+
+                const response = action.payload;
+                const typedPokemons = response.pokemon.map(slot => slot.pokemon);
+
+                state.pokemons = typedPokemons;
+                state.isByType = true;
             })
     }
 });
 
 
-export const {setInfoPokemonURL} = pokemonSlice.actions;
+export const {setInfoPokemonURL, resetState} = pokemonSlice.actions;
 export default pokemonSlice.reducer;

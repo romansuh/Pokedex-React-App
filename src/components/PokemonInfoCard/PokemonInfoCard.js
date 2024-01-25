@@ -6,6 +6,7 @@ import "./PokemonInfoCard.css";
 import TypeBadge from "../TypeBadge/TypeBadge";
 
 const getPokemonIndex = (pokeapiURL) => {
+    console.log(pokeapiURL);
     const id = pokeapiURL.split("/").slice(-2, -1).toString();
     return id.padStart(4, "0");
 }
