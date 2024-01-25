@@ -5,6 +5,7 @@ import {useEffect, useRef} from "react";
 import {fetchPokemons} from "../../store/features/pokemonSlice";
 import {POKE_API_URL_FIRST} from "../../common/pokeapi";
 import LoadMoreButton from "./LoadMoreButton";
+import PokedexHeader from "../PokedexHeader/PokedexHeader";
 
 const PokemonCardsList = () => {
     const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const PokemonCardsList = () => {
 
     return (
         <div className="cards_list_btn_container">
+            <PokedexHeader/>
             <div className="cards_list_container">
                 {renderPokemonsList()}
             </div>
