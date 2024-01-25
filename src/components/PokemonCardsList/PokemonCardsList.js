@@ -25,8 +25,7 @@ const PokemonCardsList = () => {
         <div className="cards_list_btn_container">
             <div className="cards_list_container">
                 {pokemons.map(pokemon => {
-                    const key = pokemon.url.slice(-5);
-                    console.log(key)
+                    const key = pokemon.url.split("/").slice(-2, -1);
                     return <PokemonCard key={key} name={pokemon.name} pokeapiURL={pokemon.url}/>
                 })}
                 <div ref={listBottomRef}/>

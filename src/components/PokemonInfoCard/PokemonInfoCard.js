@@ -2,13 +2,20 @@ import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {fetchPokemonInfo} from "../../common/pokeapi";
 import {capitalizeFirstLetter} from "../../App";
+import "./PokemonInfoCard.css";
+import TypeBadge from "../TypeBadge/TypeBadge";
+
+const getPokemonIndex = (pokeapiURL) => {
+    const id = pokeapiURL.split("/").slice(-2, -1).toString();
+    return id.padStart(4, "0");
+}
 
 const PokemonInfoCard = () => {
     const pokeapiURL = useSelector(state => state.pokemon.infoPokemonURL)
 
     const [sprite, setSprite] = useState('');
     const [name, setName] = useState('');
-    const [types, setTypes] = useState('');
+    const [types, setTypes] = useState([]);
     const [attack, setAttack] = useState('');
     const [defense, setDefense] = useState('');
     const [hp, setHp] = useState('');
@@ -26,7 +33,7 @@ const PokemonInfoCard = () => {
 
                 setSprite(pokemonInfo.sprites.front_default);
                 setName(pokemonInfo.name);
-                setTypes(pokemonInfo.types.map(slot => capitalizeFirstLetter(slot.type.name)).join(", "));
+                setTypes(pokemonInfo.types.map(slot => slot.type.name));
                 setHp(stats[0].base_stat);
                 setAttack(stats[1].base_stat);
                 setDefense(stats[2].base_stat);
@@ -44,19 +51,23 @@ const PokemonInfoCard = () => {
         setPokemonInfo();
     }, [pokeapiURL])
 
+    const renderTypes = (types) => types.map(type => <TypeBadge key={type} type={type}/>);
+
     return (
         <div className="info_card_container">
             <img src={sprite} alt="Pokemon sprite"/>
             <table>
                 <thead>
-                <tr>
-                    <th>{capitalizeFirstLetter(name)}</th>
+                <tr className="no_border">
+                    <th colSpan={2}>{capitalizeFirstLetter(name) + `#${getPokemonIndex(pokeapiURL)}`}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Type</td>
-                    <td>{types}</td>
+                    <td>Type(s)</td>
+                    <td className="types_container_info">
+                        {renderTypes(types)}
+                    </td>
                 </tr>
                 <tr>
                     <td>Attack</td>

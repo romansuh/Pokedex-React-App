@@ -2,5 +2,7 @@
     border: 1px solid black;
     padding: 1px 2px;
     height: fit-content;
+    width: fit-content;
     border-radius: 5px;
+    text-align: center;
 }
