@@ -7,7 +7,7 @@ import {setInfoPokemonURL} from "./store/features/pokemonSlice";
 
 export const capitalizeFirstLetter = (word) => word.charAt(0).toUpperCase() + word.substring(1);
 
-export const InfoVisibleContext = createContext()
+export const InfoContext = createContext()
 
 function App() {
     const [isInfoVisible, setInfoVisible] = useState(false);
@@ -19,14 +19,14 @@ function App() {
     }
 
     return (
-        <InfoVisibleContext.Provider
+        <InfoContext.Provider
             value={{handleInfoVisible}}
         >
             <div className="App">
                 <PokemonCardsList handleInfoVisible={handleInfoVisible}/>
                 {isInfoVisible && <PokemonInfoCard/>}
             </div>
-        </InfoVisibleContext.Provider>
+        </InfoContext.Provider>
     );
 }
 

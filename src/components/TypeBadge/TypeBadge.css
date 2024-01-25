@@ -1,0 +1,6 @@
+.type_badge {
+    border: 1px solid black;
+    padding: 1px 2px;
+    height: fit-content;
+    border-radius: 5px;
+}

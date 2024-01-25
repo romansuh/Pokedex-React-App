@@ -52,13 +52,6 @@
     margin-top: 2px;
 }
 
-.type_badge {
-    border: 1px solid black;
-    padding: 1px 2px;
-    height: fit-content;
-    border-radius: 5px;
-}
-
 .type_name {
     font-size: 12px;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
