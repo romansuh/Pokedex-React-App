@@ -39,7 +39,7 @@ const PokemonCard = ({
             onClick={() => handleInfoVisible(pokeapiURL)}
 
         >
-            <img src={spriteURL} alt="Pokemon sprite"/>
+            <img className="card_sprite" src={spriteURL} alt="Pokemon sprite"/>
 
             <h4>{capitalizeFirstLetter(name)}</h4>
 

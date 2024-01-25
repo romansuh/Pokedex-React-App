@@ -10,6 +10,7 @@ const PokemonCardsList = () => {
     const dispatch = useDispatch();
     const pokemons = useSelector(state => state.pokemon.pokemons);
     const status = useSelector(state => state.pokemon.status);
+    const isByType = useSelector(state => state.pokemon.isByType);
 
     const listBottomRef = useRef(null);
 
@@ -21,16 +22,28 @@ const PokemonCardsList = () => {
         listBottomRef.current?.scrollIntoView({behavior: "smooth"});
     }, [pokemons])
 
-    return (
-        <div className="cards_list_btn_container">
-            <div className="cards_list_container">
+    const renderPokemonsList = () => {
+        if (isByType && pokemons.length === 0) {
+            return <span>Seems that no such pokemons are known!</span>
+        }
+
+        return (
+            <>
                 {pokemons.map(pokemon => {
                     const key = pokemon.url.split("/").slice(-2, -1);
                     return <PokemonCard key={key} name={pokemon.name} pokeapiURL={pokemon.url}/>
                 })}
                 <div ref={listBottomRef}/>
+            </>
+        );
+    }
+
+    return (
+        <div className="cards_list_btn_container">
+            <div className="cards_list_container">
+                {renderPokemonsList()}
             </div>
-            <LoadMoreButton requestStatus={status}/>
+            {!isByType && <LoadMoreButton requestStatus={status}/>}
         </div>
     );
 }

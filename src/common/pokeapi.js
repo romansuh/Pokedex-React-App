@@ -30,5 +30,5 @@ export const POKEMON_TYPES = [
     "steel",
     "fairy",
     "unknown",
-    "shadows"
+    "shadow"
 ]

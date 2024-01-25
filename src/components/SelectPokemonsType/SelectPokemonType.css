@@ -1,0 +1,20 @@
+.set_filter_type_form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.select_type_btn {
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    background-color: var(--color-primary);
+    transition: background-color 0.2s;
+    color: white;
+    font-size: 18px;
+    padding: 5px;
+
+}
+
+.select_type_btn:not([disabled]):hover, .loading {
+    background-color: var(--color-accent);
+}

@@ -3,6 +3,7 @@ import {capitalizeFirstLetter, InfoContext} from "../../App";
 import {useDispatch} from "react-redux";
 import {fetchAllPokemonsByType, fetchPokemons, resetState} from "../../store/features/pokemonSlice";
 import {useContext} from "react";
+import "./SelectPokemonType.css";
 
 const SelectPokemonsType = () => {
     const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const SelectPokemonsType = () => {
     }
 
     return (
-        <form onSubmit={handleSelectPokemonsType}>
+        <form onSubmit={handleSelectPokemonsType} className="set_filter_type_form">
             <label>
                 Get all pokemons of type:
                 <select name="selectedType" defaultValue="none">
